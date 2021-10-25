@@ -15,6 +15,7 @@
 */
 package com.example.dogglers.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -73,6 +74,7 @@ class DogCardAdapter(
 
     override fun getItemCount(): Int = data.size // TODO: return the size of the data set instead of 0
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     override fun onBindViewHolder(holder: DogCardAdapter.DogCardViewHolder, position: Int) {
         // TODO: Get the data at the current position
         // TODO: Set the image resource for the current dog
@@ -85,8 +87,9 @@ class DogCardAdapter(
         //  resources?.getString(R.string.dog_hobbies, dog.hobbies)
 
         val currentData = data[position]
-        holder.dogImage?.setImageDrawable(resources.getDrawable(currentData.imageResourceId, ))
-        holder.dogName.text = resources.getString(currentData.name)
-        holder.dogAge
+        holder.dogImage?.setImageDrawable(resources?.getDrawable(currentData.imageResourceId))
+        holder.dogName?.text = currentData.name
+        holder.dogAge?.text = resources?.getString(R.string.dog_age, currentData.age)
+        holder.dogHobbies?.text = resources?.getString(R.string.dog_hobbies, currentData.hobbies)
     }
 }
